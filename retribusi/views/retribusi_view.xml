@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="retribusi_view_tree" model="ir.ui.view">
+        <field name="name">retribusi_view_tree</field>
+        <field name="model">kmk.draft</field>
+        <field name="arch" type="xml">
+            <tree string="retribusi_tree">
+                <field name="name"/>
+                <field name="tahun"/>
+                <field name="lokasi"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="retribusi_view_form" model="ir.ui.view">
+        <field name="name">retribusi_view_form</field>
+        <field name="model">kmk.draft</field>
+        <field name="arch" type="xml">
+            <form string="retribusi_form">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,data_bangunan,prasarana,done"/>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary" attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                    <button name="action_ok" type="object" string="Confirm" class="btn-primary" attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"/>
+<!--                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': [('status', '!=', 'draft')]}" class="btn-secondary"/>-->
+                </header>
+                <sheet>
+                    <div align="center" attrs="{'invisible': [('status', '!=', 'draft')]}">
+                        <h1>HITUNG RETIBUSI</h1>
+                        <h1>PERSETUJUAN BANGUNAN GEDUNG (PBG)</h1>
+                    </div>
+                    <div align="center" attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">
+                        <h1>DATA BANGUNAN</h1>
+                        <br></br>
+                    </div>
+                    <div align="center" attrs="{'invisible': [('status', '!=', 'prasarana')]}">
+                        <h1>PRASARANA</h1>
+                        <br></br>
+                    </div>
+                    <hr></hr>
+<!--                    <div align="center" attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <h3>INDEKS TERINTEGRASI</h3>-->
+<!--                        <br></br>-->
+<!--                    </div>-->
+                        <group attrs="{'invisible': [('status', '!=', 'draft')]}">
+                            <field name="name"/>
+                            <field name="tahun" />
+                            <field name="lokasi" />
+                        </group>
+
+                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">
+                        <group>
+                            <field name="fungsi"/>
+                            <field name="faktor_kepemilikan"/>
+                            <field name="jenis_pembangunan"/>
+                            <field name="permanensi"/>
+                            <field name="kompleksitas"/>
+                        </group>
+                        <group>
+                            <field name="luas_bangunan"/>
+                            <field name="shst"/>
+                            <field name="ketinggian" options='{"type":"number", "step":1}'/>
+                            <field name="tinggi_bangunan"/>
+                            <field name="lantai_basement"/>
+<!--                            <field name="index_fungsi"/>-->
+<!--                            <field name="indeks_kepemilikan"/>-->
+                        </group>
+                    </group>
+                    <br></br>
+                    <div align="center" attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">
+                        <h1>Indeks Terintegrasi</h1>
+                        <br></br>
+                    </div>
+                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">
+                        <group style="width:25%">
+                            <h4 align="center">Klasifikasi</h4>
+                        </group>
+                        <group style="width:25%">
+                            <h4 align="center">Bobot (Bp)</h4>/>
+                        </group>
+                        <group style="width:25%">
+                            <h4 align="center">Indeks (Ip)</h4>
+                        </group>
+                        <group style="width:25%">
+                            <h4 align="center">Σ(Bp x Ip)</h4>
+                        </group>
+                    </group>
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:25%" >-->
+<!--                            <field name="permanensi"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:25%">-->
+<!--                            <field name="bobot_permanensi" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:25%">-->
+<!--                            <field name="indeks_permanensi" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:25%">-->
+<!--                            <field name="sum_permanensi" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+                    <hr></hr>
+                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">
+                        <group style="width:33%">
+                            <field name="index_fungsi"/>
+                        </group>
+                        <group style="width:33%">
+                            <field name="indeks_kepemilikan"/>
+                        </group>
+                        <group style="width:33%">
+                            <field name="sum_index"/>
+                        </group>
+                    </group>
+
+<!--                      <hr attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"></hr>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <div style="width:40%">-->
+<!--                            <p style="text-align: center;"><strong>Parameter</strong></p>-->
+<!--                        </div>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;">Bobot Parameter (Bp)</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;">Indeks Parameter (Ip)</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;">Bp x Ip</p>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                      <hr attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"></hr>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:40%">-->
+<!--                            <field name="permanensi" align="center"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="bobot_permanensi" nolabel="1" align="center"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="indeks_permanensi" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="sum_permanensi" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:40%">-->
+<!--                            <field name="kompleksitas" align="center"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="bobot_kompleksitas" nolabel="1" align="center"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="indeks_kompleksitas" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="sum_kompleksitas" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:40%">-->
+<!--                            <field name="ketinggian" align="center" options='{"type":"number","step":1}'/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="bobot_ketinggian" nolabel="1" align="center"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="indeks_ketinggian" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="sum_ketinggian" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <hr></hr>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:40%">-->
+<!--                            <p>&amp;nbsp;</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>&amp;nbsp;</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;"><strong>Σ(Bp x Ip)</strong></p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="sum_index" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                      <hr attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"></hr>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>&amp;nbsp;</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:40%">-->
+<!--                            <h4 style="white-space: nowrap;">Index Terintegrasi (It) : If x Σ(Bp x Ip) x Fm</h4>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <h4><field name="indeks_terintegrasi" nolabel="1"/></h4>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>&amp;nbsp;</p>>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                      <hr attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"></hr>-->
+<!--                    <div align="center" attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <h3>INDEX TERBANGUN</h3>-->
+<!--                        <br></br>-->
+<!--                    </div>-->
+<!--                    <hr attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"></hr>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:40%">-->
+<!--                            <field name="jenis_pembangunan"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>&amp;nbsp;</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;"><strong>Indeks BG Terbangun (Ibg)</strong></p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <field name="indeks_terbangun" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:33%; text-align:center;">-->
+<!--                            <h5 style="white-space: nowrap;">SATUAN HARGA STANDAR TERTINGGI (SHST)</h5>-->
+<!--                        </group>-->
+<!--                        <group style="width:33%; text-align:center;">-->
+<!--                            <h5 style="white-space: nowrap;">Indeks Lokalitas (Ilo)</h5>-->
+<!--                        </group>-->
+<!--                        <group style="width:33%; text-align:center;">-->
+<!--                            <h5 style="white-space: nowrap;">Luas Bangunan (LLt)</h5>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:33%; text-align:center;">-->
+<!--                            <field name="shst" nolabel="1" widget="monetary"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:33%; text-align:center;">-->
+<!--                            <field name="indeks_lokalitas" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:33%; text-align:center;">-->
+<!--                            <field name="luas_bangunan" nolabel="1"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <hr attrs="{'invisible': [('status', '!=', 'data_bangunan')]}"></hr>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'data_bangunan')]}">-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>&amp;nbsp;</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:40%">-->
+<!--                            <h4 style="white-space: nowrap;">Nilai Retribusi (Nr) : LLt x (Ilo x SHST) x It x Ibg</h4>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <h4><field name="nilai_retribusi" nolabel="1"/></h4>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>&amp;nbsp;</p>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'prasarana')]}">-->
+<!--                        <group style="width:5%">-->
+<!--                            <p>No</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>Prasarana</p>>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p>Bangunan</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;">Indeks Prasarana Bangunan Gedung (I)</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%">-->
+<!--                            <p style="white-space: nowrap;">Harga Satuan (HSpbg)</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:15%">-->
+<!--                            <p>Luas</p>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <group attrs="{'invisible': [('status', '!=', 'prasarana')]}">-->
+<!--                        <group style="width:5%">-->
+<!--                            <p>1.</p>-->
+<!--                        </group>-->
+<!--                        <group style="width:15%">-->
+<!--                            <p>Konstruksi Pembatas/Penahan/Pengaman</p>/>-->
+<!--                        </group>-->
+<!--                        <group style="width:5%">-->
+<!--                            <field name="konstruksi_1" nolabel="1" widget="boolean_toggle"/>-->
+<!--                        </group>-->
+<!--                        <group style="width:20%" attrs="{'invisible': [('konstruksi_1', '!=', 'True')]}">-->
+<!--                            <p>Pagar</p>-->
+<!--                        </group>-->
+<!--                        <group  style="width:20%">-->
+<!--                            <p></p>-->
+<!--                        </group>-->
+<!--                        <group style="width:15%">-->
+<!--                            <p>Luas</p>-->
+<!--                        </group>-->
+<!--                    </group>-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="retribusi_view_action" model="ir.actions.act_window">
+        <field name="name">Test</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kmk.draft</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="retribusi_menu_categ"
+              name="Test"
+              parent="test_categ"
+              action="retribusi_view_action"
+              sequence="10"/>
+
+    </data>
+</odoo>
